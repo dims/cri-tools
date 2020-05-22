@@ -20,6 +20,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+set -x
+
 UPLOAD_GCS=${UPLOAD_GCS:-false}
 GCS_PATH=${GCS_PATH:-"kubernetes-release/crictl"}
 VERSION=$(git describe --abbrev=0 --tag)
