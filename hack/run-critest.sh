@@ -31,14 +31,16 @@ fi
 
 cat <<EOF | sudo tee /etc/docker/daemon.json
 {
-  "bip": "169.254.123.1/24"
+  "bip": "169.254.123.1/24",
+  "iptables": false,
+  "ip-masq": false
 }
 EOF
 sudo cat /etc/docker/daemon.json
 sudo service docker restart
 
 # Start dockershim first
-/usr/local/bin/kubelet --v=3 --logtostderr --network-plugin=kubenet --pod-cidr="10.100.0.0/24" &
+/usr/local/bin/kubelet --v=3 --logtostderr --network-plugin=kubenet --fail-swap-on=false --pod-cidr="10.100.0.0/24" &
 
 # Wait a while for dockershim starting.
 sleep 30

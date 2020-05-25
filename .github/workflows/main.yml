@@ -14,10 +14,10 @@ jobs:
     timeout-minutes: 60
     steps:
 
-    - name: Set up Go 1.13
+    - name: Set up Go 1.14
       uses: actions/setup-go@v1
       with:
-        go-version: 1.13
+        go-version: 1.14
       id: go
 
     - name: Setup Go binary path
@@ -35,7 +35,7 @@ jobs:
     - name: Checkout project
       uses: actions/checkout@v2
       with:
-        repository: kubernetes/kubernetes
+        repository: dims/kubernetes
         path: src/k8s.io/kubernetes
 
     - name: Build & Test
@@ -45,11 +45,11 @@ jobs:
         export LC_ALL=C
         export GOPROXY=https://proxy.golang.org
         export GOSUMDB=https://sum.golang.org
-        set -x
-        make install.ginkgo
-        cp build/bin/ginkgo /usr/local/bin
-        make test
-        make install
-        hack/install-docker.sh
-        hack/install-kubelet.sh
-        hack/run-critest.sh
+        set -xeu
+        sudo ip link
+        sudo ifconfig -a
+        sudo make install.ginkgo critest crictl test
+        export PATH=$(pwd)/build/bin:$(pwd)/_output:$PATH
+        sudo env PATH=$PATH hack/install-docker.sh
+        sudo env PATH=$PATH GOPATH=$GOPATH hack/install-kubelet.sh
+        sudo env PATH=$PATH hack/run-critest.sh
