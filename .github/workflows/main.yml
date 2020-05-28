@@ -1,0 +1,55 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    name: cri-tools CI
+    runs-on: ubuntu-18.04
+    timeout-minutes: 60
+    steps:
+
+    - name: Set up Go 1.14
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.14
+      id: go
+
+    - name: Setup Go binary path
+      shell: bash
+      run: |
+        echo "::set-env name=GOPATH::${{ github.workspace }}"
+        echo "::add-path::${{ github.workspace }}/bin"
+
+    - name: Check out code
+      uses: actions/checkout@v2
+      with:
+        path: src/sigs.k8s.io/cri-tools
+        fetch-depth: 25
+
+    - name: Checkout project
+      uses: actions/checkout@v2
+      with:
+        repository: dims/kubernetes
+        path: src/k8s.io/kubernetes
+
+    - name: Build & Test
+      working-directory: src/sigs.k8s.io/cri-tools
+      run: |
+        export LANG=C
+        export LC_ALL=C
+        export GOPROXY=https://proxy.golang.org
+        export GOSUMDB=https://sum.golang.org
+        set -xeu
+        sudo ip link
+        sudo ifconfig -a
+        sudo make install.ginkgo critest crictl test
+        export PATH=$(pwd)/build/bin:$(pwd)/_output:$PATH
+        sudo env PATH=$PATH hack/install-docker.sh
+        sudo env PATH=$PATH GOPATH=$GOPATH hack/install-kubelet.sh
+        sudo env PATH=$PATH hack/run-critest.sh
