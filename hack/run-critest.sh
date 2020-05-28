@@ -19,6 +19,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 arch=$(uname -m)
 
@@ -30,7 +31,7 @@ else
 fi
 
 # Start dockershim first
-/usr/local/bin/kubelet --v=3 --logtostderr --experimental-dockershim &
+/usr/local/bin/kubelet --network-plugin="" --v=3 --logtostderr &
 
 # Wait a while for dockershim starting.
 sleep 10
@@ -40,9 +41,9 @@ sleep 10
 # Skip runtime should support execSync with timeout because docker doesn't
 # support it.
 if [ "$arch" == x86_64 ]; then
-	critest -ginkgo.skip="runtime should support reopening container log|runtime should support execSync with timeout" -parallel 8
+	critest -ginkgo.skip="runtime should support reopening container log|runtime should support execSync with timeout" -parallel 1
 else
-	critest -ginkgo.skip="runtime should support reopening container log|runtime should support execSync with timeout|runtime should support SupplementalGroups" -parallel 8
+	critest -ginkgo.skip="runtime should support reopening container log|runtime should support execSync with timeout|runtime should support SupplementalGroups" -parallel 1
 fi
 
 # Run benchmark test cases

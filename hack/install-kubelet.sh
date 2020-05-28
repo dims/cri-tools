@@ -17,19 +17,15 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 # Install kubelet
 git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes
 cd $GOPATH/src/k8s.io/kubernetes
 
-# This is a workaround due to build issues caused by Kublet removing
-# Docker support: in kubernetes/kubernetes#87746
-# TODO: This should be removed once issues in kubelet are resolved
-git checkout 6f9c0f9edd835367116971074fb743c39a6b3863
-
-if [ ${TRAVIS_BRANCH:-"master"} != "master" ]; then
-  # We can do this because cri-tools have the same branch name with kubernetes.
-  git checkout "${TRAVIS_BRANCH}"
-fi
+#if [ ${TRAVIS_BRANCH:-"master"} != "master" ]; then
+#  # We can do this because cri-tools have the same branch name with kubernetes.
+#  git checkout "${TRAVIS_BRANCH}"
+#fi
 make WHAT='cmd/kubelet'
 sudo cp _output/bin/kubelet /usr/local/bin
