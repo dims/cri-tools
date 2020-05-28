@@ -20,7 +20,7 @@ set -o pipefail
 set -x
 
 # Install kubelet
-git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes
+git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes || true
 cd $GOPATH/src/k8s.io/kubernetes
 
 #if [ ${TRAVIS_BRANCH:-"master"} != "master" ]; then

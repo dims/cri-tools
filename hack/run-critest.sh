@@ -31,7 +31,7 @@ else
 fi
 
 # Start dockershim first
-/usr/local/bin/kubelet --network-plugin="" --v=3 --logtostderr &
+/usr/local/bin/kubelet --fail-swap-on=false --network-plugin="" --v=3 --logtostderr &
 
 # Wait a while for dockershim starting.
 sleep 10
