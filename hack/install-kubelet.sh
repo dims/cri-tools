@@ -20,7 +20,6 @@ set -o pipefail
 set -x
 
 # Install kubelet
-git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes || true
 cd $GOPATH/src/k8s.io/kubernetes
 
 #if [ ${TRAVIS_BRANCH:-"master"} != "master" ]; then
@@ -29,3 +28,8 @@ cd $GOPATH/src/k8s.io/kubernetes
 #fi
 make WHAT='cmd/kubelet'
 sudo cp _output/bin/kubelet /usr/local/bin
+
+# Install docker shim
+cd $GOPATH/src/github.com/dims/cri-dockerd
+go install .
+sudo mv $GOPATH/bin/cri-dockerd /usr/local/bin

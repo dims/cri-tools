@@ -31,7 +31,10 @@ else
 fi
 
 # Start dockershim first
-/usr/local/bin/kubelet --fail-swap-on=false --network-plugin="" --v=3 --logtostderr &
+logs_dir="${GITHUB_WORKSPACE:-/tmp}/logs"
+mkdir -p $logs_dir
+#/usr/local/bin/kubelet --fail-swap-on=false --network-plugin="" --v=10 --logtostderr >$logs_dir/kubelet.log 2>&1 &
+/usr/local/bin/cri-dockerd --v=10 --network-plugin="" --logtostderr >$logs_dir/cri-dockerd.log 2>&1 &
 
 # Wait a while for dockershim starting.
 sleep 10
