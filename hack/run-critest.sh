@@ -36,6 +36,9 @@ fi
 # Wait a while for dockershim starting.
 sleep 10
 
+# Disable AppArmor tests
+export container=yes
+
 # Run e2e test cases
 # Skip reopen container log test because docker doesn't support it.
 # Skip runtime should support execSync with timeout because docker doesn't
