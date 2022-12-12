@@ -9,8 +9,8 @@ require (
 	github.com/golang/glog v1.0.0
 	github.com/golang/protobuf v1.5.2
 	github.com/moby/term v0.0.0-20220808134915-39b0c02b01ae
-	github.com/onsi/ginkgo/v2 v2.4.0
-	github.com/onsi/gomega v1.23.0
+	github.com/onsi/ginkgo/v2 v2.6.0
+	github.com/onsi/gomega v1.24.0
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/runc v1.1.4
 	github.com/opencontainers/selinux v1.10.2
@@ -19,7 +19,7 @@ require (
 	github.com/urfave/cli/v2 v2.23.0
 	go.opentelemetry.io/otel/trace v0.20.0
 	golang.org/x/net v0.1.0
-	golang.org/x/sys v0.1.0
+	golang.org/x/sys v0.2.0
 	golang.org/x/term v0.1.0
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/api v0.25.0
