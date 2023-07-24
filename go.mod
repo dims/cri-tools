@@ -10,16 +10,16 @@ require (
 	github.com/golang/protobuf v1.5.3
 	github.com/moby/term v0.5.0
 	github.com/onsi/ginkgo/v2 v2.11.0
-	github.com/onsi/gomega v1.27.8
+	github.com/onsi/gomega v1.27.9
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/runc v1.1.7
 	github.com/opencontainers/selinux v1.11.0
 	github.com/pborman/uuid v1.2.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/urfave/cli/v2 v2.25.7
-	golang.org/x/net v0.11.0
-	golang.org/x/sys v0.9.0
-	golang.org/x/term v0.9.0
+	golang.org/x/net v0.12.0
+	golang.org/x/sys v0.10.0
+	golang.org/x/term v0.10.0
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/api v0.27.0
 	k8s.io/apimachinery v0.27.0
@@ -85,7 +85,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.11.2 // indirect
 	go.opentelemetry.io/proto/otlp v0.19.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220223155221-ee480838109b // indirect
-	golang.org/x/text v0.10.0 // indirect
+	golang.org/x/text v0.11.0 // indirect
 	golang.org/x/time v0.0.0-20220210224613-90d013bbcef8 // indirect
 	golang.org/x/tools v0.9.3 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
