@@ -6,7 +6,7 @@ require (
 	github.com/docker/distribution v2.8.2+incompatible
 	github.com/docker/docker v24.0.2+incompatible
 	github.com/docker/go-units v0.5.0
-	github.com/golang/glog v1.1.1
+	github.com/golang/glog v1.1.2
 	github.com/golang/protobuf v1.5.3
 	github.com/moby/term v0.5.0
 	github.com/onsi/ginkgo/v2 v2.11.0
